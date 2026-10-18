@@ -220,6 +220,8 @@ export type SHOW_OPTIONS = {
 export interface VehicleCardConfig extends LovelaceCardConfig, SHOW_OPTIONS {
   type: string;
   entity: string;
+  /** Optional EU Data Act per-field SOC provenance and energy estimate. */
+  soc_quality?: import('../utils/soc-quality').SocQualityConfig;
   /**
    * Which HA car integration to wire the card against. One of the keys
    * in `INTEGRATION_PRESETS` (`vag_connect`, `tesla_custom`, `mbapi2020`,

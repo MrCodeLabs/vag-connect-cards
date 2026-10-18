@@ -2,6 +2,20 @@
   "name": "German",
   "nativeName": "Deutsch",
   "card": {
+    "socQuality": {
+      "title": "SOC-Datenqualität",
+      "missing": "SOC ist nicht verfügbar.",
+      "ambiguous": "Die Quelle enthält mehrdeutige SOC-Werte.",
+      "unverified": "Der SOC-Erfassungszeitpunkt ist nicht bestätigt.",
+      "future": "Der SOC-Quellzeitpunkt liegt in der Zukunft.",
+      "stale": "Der letzte SOC-Wert ist älter als die eingestellte Grenze.",
+      "fresh": "Aktueller SOC-Wert mit eigenem Erfassungszeitpunkt.",
+      "sourceTime": "SOC-Quellzeitpunkt",
+      "noSourceTime": "Kein bestätigter Quellzeitpunkt",
+      "energyToTarget": "Batterieenergie bis zum Ziel",
+      "noEstimate": "Keine verlässliche Schätzung",
+      "estimateNote": "Die Schätzung enthält keine Ladeverluste. Sie bestätigt keine Zielerreichung zum Termin und steuert das Laden nicht."
+    },
     "common": {
       "vehicle": "Fahrzeug",
       "lastUpdate": "Letzte Aktualisierung",
