@@ -1,0 +1,29 @@
+# Synthetic read-only composition: Canyonero for vehicle data, native HA
+# entities for the independently connected EVSE and planning status.
+type: vertical-stack
+cards:
+  - type: custom:canyonero-vehicle-dashboard
+    entity: sensor.example_vehicle_battery_soc
+    name: Vehicle and charging
+    show_map: false
+    show_slides: false
+    show_buttons: true
+    enable_services_control: false
+    soc_quality:
+      max_age_minutes: 25
+      capacity_kwh: 58
+      target_soc: 80
+  - type: entities
+    title: Charger and plan
+    show_header_toggle: false
+    entities:
+      - entity: binary_sensor.example_evse_connected
+        name: Vehicle connected
+      - entity: sensor.example_evse_power
+        name: Measured EVSE power
+      - entity: sensor.example_evse_session_energy
+        name: Charging session energy
+      - entity: sensor.example_plan_deadline
+        name: Plan deadline
+      - entity: sensor.example_plan_status
+        name: Plan status

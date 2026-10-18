@@ -178,6 +178,9 @@ Suggestions / bugs → [open an issue](https://github.com/its-me-prash/vag-conne
 
 ## 📄 License
 
+Optional EU Data Act SOC quality and battery-energy estimate:
+[configuration and limits](docs/soc-quality.md).
+
 [MIT](LICENSE).
 
 Original card architecture is derived from an MIT-licensed Lovelace predecessor; this project is a separate evolution focused on multi-brand vehicle integration support. License attribution is preserved in [`LICENSE`](LICENSE).

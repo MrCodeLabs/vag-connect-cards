@@ -2,6 +2,20 @@
   "name": "French",
   "nativeName": "Français",
   "card": {
+    "socQuality": {
+      "title": "Qualité des données SOC",
+      "missing": "Le SOC est indisponible.",
+      "ambiguous": "La source contient des mesures SOC ambiguës.",
+      "unverified": "L’heure de mesure du SOC n’est pas vérifiée.",
+      "future": "L’heure source du SOC est dans le futur.",
+      "stale": "La dernière mesure SOC dépasse la limite configurée.",
+      "fresh": "Mesure SOC récente avec horodatage individuel.",
+      "sourceTime": "Heure source du SOC",
+      "noSourceTime": "Aucune heure source vérifiée",
+      "energyToTarget": "Énergie batterie jusqu’à la cible",
+      "noEstimate": "Aucune estimation fiable",
+      "estimateNote": "L’estimation exclut les pertes de charge. Elle ne prédit pas la fin de charge et ne commande pas la charge."
+    },
     "common": {
       "vehicle": "Véhicule",
       "lastUpdate": "Dernière mise à jour",

@@ -43,6 +43,7 @@ import {
   applyThemesOnElement,
 } from './utils';
 import { getAddedButton, getDefaultButton, createCardElement, createCustomButtons } from './utils';
+import { socQuality, validSocQualityConfig } from './utils/soc-quality';
 
 const ROWPX = 58;
 
@@ -145,6 +146,9 @@ export class Canyonero extends LitElement implements LovelaceCard {
   };
 
   public setConfig(config: VehicleCardConfig): void {
+    if (config.soc_quality && !validSocQualityConfig(config.soc_quality)) {
+      throw new Error('soc_quality requires a positive max_age_minutes, optional positive capacity_kwh and target_soc from 0 to 100.');
+    }
     this.config = {
       ...config,
     };
@@ -250,6 +254,8 @@ export class Canyonero extends LitElement implements LovelaceCard {
       this._activeSubCard = new Set<string>();
     }
 
+    // Quality age can change while the anchor value remains unchanged.
+    if (this.config?.soc_quality && _changedProps.has('_hass')) return true;
     return hasConfigOrEntityChanged(this, _changedProps, true);
   }
 
@@ -947,8 +953,36 @@ export class Canyonero extends LitElement implements LovelaceCard {
           </svg>
         </div>
       </div>
+      ${this._renderSocQuality(socEntityId, targetSocEntityId)}
       ${this.createItemDataRow(this.localize('card.tyreCard.chargingOverview'), chargingData, '')}
       ${this.createItemDataRow(this.localize('card.tyreCard.chargingDetails'), detailsData, 'chargingDetails')}
+    `;
+  }
+
+  private _renderSocQuality(socEntityId?: string, targetSocEntityId?: string): TemplateResult | typeof nothing {
+    if (!this.config.soc_quality) return nothing;
+    const quality = socQuality(
+      socEntityId ? this._hass.states[socEntityId] : undefined,
+      this.config.soc_quality,
+      targetSocEntityId ? this._hass.states[targetSocEntityId]?.state : undefined
+    );
+    const language = this._locale.language;
+    const captured = quality.captured && quality.ageMinutes !== null
+      ? new Date(quality.captured).toLocaleString(language, { timeZone: this._hass.config.time_zone })
+      : this.localize('card.socQuality.noSourceTime');
+    const energy = quality.missingKwh === null
+      ? this.localize('card.socQuality.noEstimate')
+      : `≈ ${quality.missingKwh.toLocaleString(language, { maximumFractionDigits: 1 })} kWh`;
+    return html`
+      <div class="default-card" role="status">
+        <div class="data-header">${this.localize('card.socQuality.title')}</div>
+        <p>${this.localize(`card.socQuality.${quality.status}`)}</p>
+        <p>${this.localize('card.socQuality.sourceTime')}: ${captured}</p>
+        ${this.config.soc_quality.capacity_kwh !== undefined
+          ? html`<p>${this.localize('card.socQuality.energyToTarget')}${quality.target !== null ? ` (${quality.target} %)` : ''}: ${energy}</p>
+              <p>${this.localize('card.socQuality.estimateNote')}</p>`
+          : nothing}
+      </div>
     `;
   }
 

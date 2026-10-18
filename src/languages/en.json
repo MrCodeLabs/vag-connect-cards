@@ -2,6 +2,20 @@
   "name": "English",
   "nativeName": "English",
   "card": {
+    "socQuality": {
+      "title": "SOC data quality",
+      "missing": "SOC is not available.",
+      "ambiguous": "Source contains ambiguous SOC readings.",
+      "unverified": "SOC capture time is not verified.",
+      "future": "SOC source time is in the future.",
+      "stale": "Last SOC reading is older than the configured limit.",
+      "fresh": "Recent per-point SOC reading.",
+      "sourceTime": "SOC source time",
+      "noSourceTime": "No verified source time",
+      "energyToTarget": "Battery energy to target",
+      "noEstimate": "No reliable estimate",
+      "estimateNote": "Estimate excludes charging losses. It does not predict deadline completion or control charging."
+    },
     "common": {
       "vehicle": "Vehicle",
       "lastUpdate": "Last update",
