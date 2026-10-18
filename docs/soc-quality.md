@@ -39,3 +39,8 @@ Dates use HA's configured timezone and the card's selected language.
 This contribution does not replace your charging controller or add a fixed
 home dashboard link. A deadline/EVSE-session panel is a separate concern;
 use existing custom subcards for additional HA entities.
+
+A [standard vertical-stack example](charging-dashboard-example.yaml) keeps
+vehicle data in Canyonero and EVSE power/session/deadline status in native
+HA entities. Those measurements may come from different integrations and
+must be selected explicitly. No integration driver changes are needed.
